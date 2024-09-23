@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Portal</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        /* Video background */
+        .background-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            filter: blur(2px);
+        }
+
+        .login-container, .success-container {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
+            width: 280px;
+            max-width: 90%;
+            text-align: center;
+            border: none;
+            backdrop-filter: blur(8px);
+            position: relative;
+            z-index: 1;
+        }
+
+        .login-container h2 {
+            margin-bottom: 15px;
+            color: #fff;
+            font-weight: 900;
+            font-size: 20px;
+        }
+
+        .login-container input[type="text"],
+        .login-container input[type="password"] {
+            width: calc(100% - 20px);
+            padding: 12px;
+            margin: 8px 0;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.8);
+            font-size: 14px;
+        }
+
+        .login-container button {
+            width: 100%;
+            padding: 12px;
+            background-color: #333;
+            border: none;
+            border-radius: 6px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .login-container button:hover {
+            background-color: #555;
+        }
+
+        .show-password-container {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+            justify-content: center;
+            color: white;
+        }
+
+        .show-password-container input[type="checkbox"] {
+            margin-right: 8px;
+        }
+
+        .show-password-container label {
+            color: white;
+        }
+
+        /* Success message styling */
+        .success-container {
+            display: none;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            color: white;
+        }
+
+        .success-container h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .success-container p {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Video Background -->
+    <video class="background-video" autoplay muted loop>
+        <source src="https://www.shutterstock.com/shutterstock/videos/1098390119/preview/stock-footage--racism-headlines-fast-sequence.webm" type="video/webm">
+        Your browser does not support the video tag.
+    </video>
+
+    <div class="login-container" id="loginContainer">
+        <h2>Login</h2>
+        <form id="loginForm">
+            <input type="text" id="username" placeholder="Username" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <div class="show-password-container">
+                <input type="checkbox" id="showPassword">
+                <label for="showPassword">Show Password</label>
+            </div>
+            <button type="submit">Login</button>
+        </form>
+        <p id="errorMessage" style="color: red; display: none;">Login failed due to wrong credentials</p>
+    </div>
+
+    <!-- Success Container -->
+    <div class="success-container" id="successContainer">
+        <h1>Login Successfully</h1>
+        <p>You will be redirected to the website in a few seconds.</p>
+        <p>Please wait...</p>
+    </div>
+
+    <script>
+        // Define correct credentials
+        const correctUsername = 'igcseikah';
+        const correctPassword = 'igcseia';
+
+        // Handle form submission
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form from submitting the default way
+
+            // Get user input
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            // Validate credentials
+            if (username === correctUsername && password === correctPassword) {
+                // Hide login form and show success message
+                document.getElementById('loginContainer').style.display = 'none';
+                document.getElementById('successContainer').style.display = 'block';
+
+                // Redirect after 5 seconds to the new Google Sites link
+                setTimeout(function() {
+                    window.location.href = 'https://sites.google.com/d/1TITpxlF2kdzgU3Hf6FSZTTWhzwsh8h97/p/1AgbYPJ6py4HL67evSzqwP1qlhd5TvgcQ/edit';
+                }, 5000);
+            } else {
+                // Display error message
+                document.getElementById('errorMessage').style.display = 'block';
+            }
+        });
+
+        // Toggle password visibility
+        document.getElementById('showPassword').addEventListener('change', function() {
+            const passwordField = document.getElementById('password');
+            passwordField.type = this.checked ? 'text' : 'password';
+        });
+    </script>
+</body>
+</html>
